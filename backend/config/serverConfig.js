@@ -7,7 +7,7 @@ export const ENV = process.env.NODE_ENV || "development";
 export const FRONTEND_URL = process.env.FRONTEND_URL;
 export const MONGOOSE_URI = process.env.MONGOOSE_URI;
 
-const productionOrigin = FRONTEND_URL || "...";
+const productionOrigin = FRONTEND_URL || `http://localhost:${FRONT_PORT}`;
 
 export const config = {
   server: {
