@@ -6,17 +6,21 @@ import dotenv from "dotenv";
 import { config } from "./config/serverConfig.js";
 import { limiter } from "./middleware/rateLimiter.js";
 import connectDataBase from "./config/dataBase.js";
+import ExpressMongoSanitize from "express-mongo-sanitize";
 
 dotenv.config();
 
 const app = express();
 
-connectDataBase();
-
 app.use(helmet());
 app.use(cors(config.server.corsOptions));
-app.use(limiter);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(ExpressMongoSanitize());
+app.use(limiter);
+
+connectDataBase();
 
 export default app;
