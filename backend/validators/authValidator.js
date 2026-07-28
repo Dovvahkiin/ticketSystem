@@ -1,6 +1,6 @@
 import z from "zod";
 
-class UserValidators {
+class AuthValidator {
   static emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   static RegisterValidator() {
@@ -29,4 +29,4 @@ class UserValidators {
   }
 }
 
-export default UserValidators;
+export default AuthValidator;
