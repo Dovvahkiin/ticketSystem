@@ -1,10 +1,8 @@
 import z from "zod";
 
 class AuthValidator {
-  static emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-  static RegisterValidator() {
-    return z.object({
+  static RegisterValidator(data) {
+    const registerSchema = z.object({
       username: z
         .string()
         .min(4, "Username must have at least 4 characters")
@@ -15,17 +13,19 @@ class AuthValidator {
       email: z
         .string()
         .min(1, "Email is required")
-        .email()
-        .regex(this.emailRegex, "Invalid email address"),
+        .email("Invalid email address"),
     });
+    return registerSchema.safeParse(data);
   }
 
-  static LoginValidator() {
-    return z.object({
+  static LoginValidator(data) {
+    const loginSchema = z.object({
       username: z.string().min(4, "Username must have at least 4 characters"),
 
       password: z.string().min(8, "Password must have at least 8 characters"),
     });
+
+    return loginSchema.safeParse(data);
   }
 }
 
