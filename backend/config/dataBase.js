@@ -12,8 +12,7 @@ const connectDataBase = async () => {
       "\nMongoDB error! Details:\n" + chalk.red(`${error.message}\n`),
     );
     console.log(chalk.yellow("\----------------------------------\n"));
-
-    process.exit(1);
+    //    process.exit(1);
   }
 };
 
