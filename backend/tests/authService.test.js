@@ -9,4 +9,5 @@ test("Should register user", async () => {
   });
 
   expect(user.email).toBe("test@test.com");
+  expect(user.role).toBe("user");
 });
