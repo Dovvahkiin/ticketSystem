@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { config } from "./config/serverConfig.js";
 import { limiter } from "./middleware/rateLimiter.js";
 import ExpressMongoSanitize from "express-mongo-sanitize";
+import userRouter from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -17,7 +18,11 @@ app.use(cors(config.server.corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(ExpressMongoSanitize());
+if (process.env.NODE_ENV !== "test") {
+  app.use(ExpressMongoSanitize());
+}
 app.use(limiter);
+
+app.use("/", userRouter);
 
 export default app;
