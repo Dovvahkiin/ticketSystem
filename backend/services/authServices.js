@@ -1,4 +1,4 @@
-import User from "../models/userModel";
+import User from "../models/userModel.js";
 import chalk from "chalk";
 import bcrypt from "bcrypt";
 const saltRounds = 5;
