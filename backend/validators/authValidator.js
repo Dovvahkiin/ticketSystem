@@ -1,7 +1,7 @@
 import z from "zod";
 
 class AuthValidator {
-  static RegisterValidator(data) {
+  static registerValidator(data) {
     const registerSchema = z.object({
       username: z
         .string()
@@ -18,7 +18,7 @@ class AuthValidator {
     return registerSchema.safeParse(data);
   }
 
-  static LoginValidator(data) {
+  static loginValidator(data) {
     const loginSchema = z.object({
       username: z.string().min(4, "Username must have at least 4 characters"),
 
