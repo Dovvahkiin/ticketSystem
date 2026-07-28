@@ -1,6 +1,9 @@
 import { PORT } from "./config/serverConfig.js";
 import chalk from "chalk";
 import app from "./app.js";
+import connectDataBase from "./config/dataBase.js";
+
+await connectDataBase();
 
 app.listen(PORT, () => {
   console.log(chalk.yellow("\n ----------------------------------"));
