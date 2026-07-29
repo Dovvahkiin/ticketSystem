@@ -1,0 +1,43 @@
+import jwt from "jsonwebtoken";
+const rSecret = process.env.JWT_SECRET; //refresh secret
+const aSecret = process.env.JWT_SECRET; //access secret
+
+class JWTService {
+  static generateAccessToken(user) {
+    return jwt.sign(
+      {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      },
+      aSecret,
+      {
+        expiresIn: "15m",
+      },
+    );
+  }
+
+  static generateRefreshToken(user) {
+    return jwt.sign(
+      {
+        id: user._id,
+        username: user.username,
+      },
+      rSecret,
+      {
+        expiresIn: "30d",
+      },
+    );
+  }
+
+  static verifyAccessToken(token) {
+    return jwt.verify(token, aSecret);
+  }
+
+  static verifyRefreshToken(token) {
+    return jwt.verify(token, rSecret);
+  }
+}
+
+export default JWTService;
