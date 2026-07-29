@@ -1,4 +1,4 @@
-import AuthValidator from "../validators/authValidator.js";
+import WhichValidator from "../validators/authValidator.js";
 import AuthServices from "../services/authServices.js";
 const auth = new AuthServices();
 
@@ -7,7 +7,7 @@ class UserControllers {
     try {
       const data = req.body;
       console.log(data);
-      const validationResult = AuthValidator.registerValidator(data);
+      const validationResult = WhichValidator.usingValidator("register", data);
 
       if (!validationResult.success) {
         return res.status(400).json({
