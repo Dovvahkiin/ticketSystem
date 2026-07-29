@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import chalk from "chalk";
 import { MONGOOSE_URI } from "./serverConfig.js";
 
