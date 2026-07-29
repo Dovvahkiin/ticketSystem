@@ -1,3 +1,4 @@
+import { parse } from "dotenv";
 import z from "zod";
 
 class AuthValidator {
@@ -15,7 +16,8 @@ class AuthValidator {
         .min(1, "Email is required")
         .email("Invalid email address"),
     });
-    return registerSchema.safeParse(data);
+    const parseData = registerSchema.safeParse(data);
+    return parseData;
   }
 
   static loginValidator(data) {
@@ -25,8 +27,19 @@ class AuthValidator {
       password: z.string().min(8, "Password must have at least 8 characters"),
     });
 
-    return loginSchema.safeParse(data);
+    const parseData = loginSchema.safeParse(data);
+    return parseData;
   }
 }
 
-export default AuthValidator;
+class WhichValidator extends AuthValidator {
+  static usingValidator(type, data) {
+    if (type === "login") {
+      return this.loginValidator(data);
+    } else if (type === "register") {
+      return this.registerValidator(data);
+    }
+  }
+}
+
+export default WhichValidator;
