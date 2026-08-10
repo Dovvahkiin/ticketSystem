@@ -36,10 +36,7 @@ class AuthServices {
     const user = await User.findOne({ username });
     if (!user) throw new Error(chalk.red("Invalid credentials!"));
 
-    const checkPassword = await bcrypt.compare(
-      userDetails.password,
-      user.password,
-    );
+    const checkPassword = await bcrypt.compare(password, user.password);
 
     if (!checkPassword) throw new Error(chalk.red("Invalid credentials!"));
 
