@@ -2,7 +2,6 @@ import User from "../models/userModel.js";
 import chalk from "chalk";
 import bcrypt from "bcrypt";
 import JWTService from "./jwtServices.js";
-import { check } from "zod";
 
 const saltRounds = 5;
 
@@ -11,7 +10,7 @@ class AuthServices {
     const { username, email, password } = data;
 
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-    if (existingUser) throw new Error(chalk.red("User already exists."));
+    if (existingUser) throw new Error("User already exists.");
 
     const passwordHash = await bcrypt.hash(password, saltRounds);
     console.log("Password is hashed!");
@@ -23,7 +22,7 @@ class AuthServices {
     });
 
     return {
-      id: user._id,
+      id: user._id.toString(),
       username: user.username,
       email: user.email,
       role: user.role,
@@ -40,9 +39,6 @@ class AuthServices {
 
     if (!checkPassword) throw new Error(chalk.red("Invalid credentials!"));
 
-    //fix 404 postman
-    //make tests
-
     const accessT = JWTService.generateAccessToken({
       id: user._id,
       username: user.username,
@@ -52,7 +48,6 @@ class AuthServices {
 
     const refreshT = JWTService.generateRefreshToken({
       id: user._id,
-      username: user.username,
     });
 
     return {
