@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-const rSecret = process.env.JWT_SECRET; //refresh secret
-const aSecret = process.env.JWT_SECRET; //access secret
+const rSecret = process.env.JWT_REFRESH_SECRET; //refresh secret
+const aSecret = process.env.JWT_ACCESS_SECRET; //access secret
 
 class JWTService {
   static generateAccessToken(user) {
