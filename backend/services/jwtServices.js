@@ -1,4 +1,6 @@
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+dotenv.config();
 const rSecret = process.env.JWT_REFRESH_SECRET; //refresh secret
 const aSecret = process.env.JWT_ACCESS_SECRET; //access secret
 
@@ -22,7 +24,6 @@ class JWTService {
     return jwt.sign(
       {
         id: user._id,
-        username: user.username,
       },
       rSecret,
       {
