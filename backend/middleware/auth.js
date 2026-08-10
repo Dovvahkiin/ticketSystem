@@ -17,7 +17,7 @@ class AuthenticationFunctions {
   static checkLoginAuth = (req, res, next) => {
     //checking if user is logged in, so cannot login again!
     const token = req.cookies.accessToken;
-    if (!token) next();
+    if (!token) return next();
 
     try {
       JWTService.verifyAccessToken(token);
