@@ -1,4 +1,3 @@
-import { parse } from "dotenv";
 import z from "zod";
 
 class AuthValidator {
@@ -11,10 +10,7 @@ class AuthValidator {
 
       password: z.string().min(8, "Password must have at least 8 characters"),
 
-      email: z
-        .string()
-        .min(1, "Email is required")
-        .email("Invalid email address"),
+      email: z.email("Email is required"),
     });
     const parseData = registerSchema.safeParse(data);
     return parseData;
