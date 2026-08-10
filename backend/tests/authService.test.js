@@ -26,3 +26,14 @@ describe("POST /register", () => {
     expect(response.body.success).toBe(true);
   });
 });
+
+describe("Auth login service test", () => {
+  test("Should reject login with invalid credentials", async () => {
+    await expect(
+      auth.loginService({
+        username: "WhoAmI",
+        password: "ThisIsN0TMyP4SsW0rD!",
+      }),
+    ).rejects.toThrow("Invalid credentials");
+  });
+});
